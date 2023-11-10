@@ -1,0 +1,23 @@
+# Tôi không chỉ bạn 1 cách duy nhất, tôi chỉ cho bạn 1 cách khả thi để làm.
+
+icon sử dụng material.io 
+depressed: xóa box-shadow
+
+
+
++ padding  margin
+    + cú pháp {property}{direction}-{size}
+        +{property}: p - m (padding - margin)
+        +{direction} t b l r x y a 
+        (t:top |b: bottom| l:left|r: right| x-right left y -lef|y:top bottom|a :all)
+        +size: 0 ->5 và auto (số càng lớn size càng lớn , auto thì tự động)
+
+        example: mx-4 pa-2
+
++fluid: full witdh
+
+	flex của vuetify có 12 cột
+
++chips
+
++tooltips
