@@ -4,15 +4,16 @@
     <div class="home-container">
       <MenuVue />
       <FilterVue />
-      <v-layout>
-        <v-flex md8>
+      <v-layout row class="home-content">
+        <v-flex md8 sm12>
           <ListProduct
             :seletedList="seletedList"
             :handleSeleted="handleSeleted"
             :formatPrice="formatPrice"
+            @handleEmitVaccine='handleEmitVaccine'
           />
         </v-flex>
-        <v-flex md4>
+        <v-flex md4 sm12>
           <VaccineChoose
             :seletedList="seletedList"
             :formatPrice="formatPrice"
@@ -46,6 +47,14 @@ export default {
       seletedList: [],
     };
   },
+  
+  created() {
+    const seletedList = localStorage.getItem('seletedList')
+    if( seletedList){
+      this.seletedList = JSON.parse(seletedList)
+    }
+  
+  },
   methods: {
     handleSeleted(vaccine) {
       const index = this.seletedList.findIndex(
@@ -57,12 +66,16 @@ export default {
         this.seletedList.push(vaccine);
       }
 
-      console.log(this.seletedList);
+      localStorage.setItem('seletedList',JSON.stringify(this.seletedList))
     },
 
     formatPrice(price) {
       return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " VND";
     },
+
+    handleEmitVaccine(vaccine){
+      this.handleSeleted(vaccine);
+    }
   },
 };
 </script>
@@ -71,5 +84,19 @@ export default {
 .home-container {
   background: #f2f3f7 !important;
   padding: 20px 40px;
+}
+
+@media screen and (max-width: 1264px){
+  .home-container{
+    padding: 20px;
+
+  }
+
+}
+
+@media screen and (max-width: 960px){
+    .home-content{
+    display: block;
+  }
 }
 </style>

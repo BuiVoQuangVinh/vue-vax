@@ -1,13 +1,14 @@
 <template>
   <v-container>
-    <v-layout row>
+    <v-layout row class="vaccine">
       <v-flex
-        xl4
-        md4
+        md6
         lg4
+        xl4
         class="vaccine-item"
         v-for="(vaccine, index) in vaccines"
         :key="index"
+        clas
       >
         <div class="vaccine-item-container">
           <div class="vaccine-info">
@@ -33,14 +34,27 @@
             >
               {{ vaccine.quality > 0 ? "Chọn" : "Liên hệ" }}
             </button> -->
+            <div v-if="vaccine.quality > 0">
+              <button
+                v-if="handleButtonChoose(vaccine)"
+                class="stockingSelect"
+                @click="handleStocking(vaccine)"
+              >
+                Chọn
+              </button>
 
-            <button
-              v-if="vaccine.quality > 0"
-              class="stocking"
-              @click="handleStocking(vaccine)"
-            >
-              Chọn
-            </button>
+              <button
+                v-else
+                class="stockingSelected"
+                @click="handleStocking(vaccine)"
+              >
+                Đã chọn
+
+                <v-icon color="#ffffff" class="mx-3">{{
+                  icons.mdiCheck
+                }}</v-icon>
+              </button>
+            </div>
 
             <button
               v-if="vaccine.quality === 0"
@@ -54,20 +68,20 @@
       </v-flex>
     </v-layout>
 
-    <div  v-if="alert" class="vaccine-alert" >
+    <div v-if="alert" class="vaccine-alert">
       Phasellus tempus. Fusce ac felis sit amet ligula pharetra condimentum. In
       dui magna, posuere eget, vestibulum et, tempor auctor, justo. Pellentesque
       posuere. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere
       imperdiet, leo. Phasellus nec sem in justo pellentesque facilisis.
       Phasellus magna. Cras risus ipsum, faucibus ut, ullamcorper id, varius ac,
       leo. In hac habitasse platea dictumst. Praesent turpis.
-    </div >
+    </div>
   </v-container>
 </template>
 
 <script>
 import vaccines from "@/api/vaccine";
-import { mdiTag } from "@mdi/js";
+import { mdiTag, mdiCheck } from "@mdi/js";
 export default {
   props: {
     seletedList: Array,
@@ -78,6 +92,7 @@ export default {
     return {
       icons: {
         mdiTag,
+        mdiCheck,
       },
       vaccines,
       alert: false,
@@ -86,11 +101,19 @@ export default {
 
   methods: {
     handleStocking(vaccine) {
-      console.log("vaccine vẫn còn", vaccine);
+      // console.log("vaccine vẫn còn", vaccine);
+      // this.$emit("handleEmitVaccine", vaccine);
+      this.handleSeleted(vaccine);
     },
     handleRunOutOf(vaccine) {
       console.log("vaccine đã hết", vaccine);
       this.alert = !this.alert;
+    },
+
+    handleButtonChoose(vaccine) {
+      return (
+        this.seletedList.findIndex((item) => item.name == vaccine.name) < 0
+      );
     },
   },
 };
@@ -154,10 +177,12 @@ export default {
   text-overflow: ellipsis;
 }
 
-.stocking {
+.stockingSelect {
   background: #2a388f;
 }
-
+.stockingSelected {
+  background: #35944a;
+}
 .runOutOf {
   background-color: rgb(243, 144, 33);
 }
@@ -180,5 +205,19 @@ export default {
   transform: translate(-50%, -50%);
   background: #2a388f;
   color: white;
+}
+@media screen and (max-width: 960px) {
+  .vaccine {
+    overflow-y: auto;
+    overflow-x: auto;
+    width: 100%;
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  .vaccine-item{
+    display: inline-block;
+    width: 33%;
+  }
 }
 </style>

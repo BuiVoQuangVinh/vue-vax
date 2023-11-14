@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <v-layout class="justify-space-between align-center">
-      <v-flex md9>
+  <div class="menu">
+    <v-layout class="justify-space-between align-center menu-container">
+      <v-flex md8>
         <v-layout class="align-center justify-start">
-          <div class="text-center menu">
+          <div class="text-center menu-bar">
             <v-menu open-on-hover bottom offset-y>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
@@ -32,11 +32,19 @@
             </v-menu>
           </div>
 
-          <div class="menu-select">Thông tin sản phẩm vắc xin</div>
+          <div class="menu-select">
+            <p class="menu-select-text">Thông tin sản phẩm vắc xin</p>
+          </div>
+
+          <v-btn color="#f39021" class="menu-button-selected pa-2" dark>
+            <v-icon class="mr-2">{{ icons.mdiCartOutline }}</v-icon>
+            <span>Đã chọn ()</span>
+          </v-btn>
         </v-layout>
       </v-flex>
-      <v-flex md3>
-        <v-card class="mx-auto menu-input" text color="grey-lighten-3" width="600">
+      <v-flex md4>
+        <p class="menu-input-text">Thông tin sản phẩm vắc xin</p>
+        <v-card class="mx-auto menu-input" text color="grey-lighten-3">
           <v-card-text>
             <v-text-field
               :loading="loading"
@@ -44,7 +52,6 @@
               single-line
               hide-details
               class="menu-input-text-field"
-            
             >
               <template v-slot:prepend>
                 <v-icon v-if="icons.mdiMagnify">{{ icons.mdiMagnify }}</v-icon>
@@ -58,7 +65,7 @@
 </template>
 
 <script>
-import { mdiMenu, mdiMagnify } from "@mdi/js";
+import { mdiMenu, mdiMagnify, mdiCartOutline } from "@mdi/js";
 export default {
   data: () => ({
     loaded: false,
@@ -66,6 +73,7 @@ export default {
     icons: {
       mdiMenu,
       mdiMagnify,
+      mdiCartOutline,
     },
     items: [
       { title: "Mua đặt giữ vắc xin theo yêu cầu" },
@@ -81,6 +89,9 @@ export default {
 
 <style  scoped>
 .menu {
+  padding: 0 12px;
+}
+.menu-bar {
   color: #f2f3f7;
   padding: 24px 8px;
   margin-right: 32px;
@@ -106,10 +117,14 @@ export default {
   background: #c2731a;
 }
 
-.menu-select {
+.menu-input-text,
+.menu-select-text {
   color: #2a388f;
   font-weight: bold;
   font-size: 24px;
+}
+.menu-input-text {
+  display: none;
 }
 
 .menu-input {
@@ -120,9 +135,36 @@ export default {
   padding: 0;
   margin: 0;
   box-shadow: none;
+  width: 100%;
 }
-s
-.v-card__subtitle, .v-card__text, .v-card__title {
-    padding: 12px;
+s .v-card__subtitle,
+.v-card__text,
+.v-card__title {
+  padding: 12px;
+}
+
+.menu-button-selected {
+  display: none;
+}
+
+@media screen and (max-width: 959px) {
+  .menu-bar {
+    margin-right: 30%;
+  }
+  .menu-container {
+    display: block;
+  }
+  .menu-input {
+    width: 100%;
+  }
+  .menu-select-text {
+    display: none;
+  }
+  .menu-button-selected {
+    display: block;
+  }
+  .menu-input-text {
+    display: block;
+  }
 }
 </style>

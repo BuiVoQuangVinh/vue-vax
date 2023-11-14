@@ -1,17 +1,18 @@
 <template>
-  <div>
-    <MenuVue />
+  <div class="about">
+    <ListProduct />
   </div>
 </template>
 
 <script>
-import MenuVue from "@/components/MenuVue.vue";
+import ListProduct from "@/components/ListProduct.vue";
 export default {
   components: {
-    MenuVue,
+    ListProduct,
   },
 };
 </script>
 
 <style>
+
 </style>

@@ -54,7 +54,7 @@ export default {
 
 <style>
 .filter {
-  padding: 12px 0;
+  padding:28px 24px;
 }
 .filter-select {
   width: 300px;
