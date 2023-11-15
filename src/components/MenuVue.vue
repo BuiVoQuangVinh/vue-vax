@@ -2,7 +2,7 @@
   <div class="menu">
     <v-layout class="justify-space-between align-center menu-container">
       <v-flex md8>
-        <v-layout class="align-center justify-start">
+        <v-layout class="align-center  menu-container-left">
           <div class="text-center menu-bar">
             <v-menu open-on-hover bottom offset-y>
               <template v-slot:activator="{ on, attrs }">
@@ -38,7 +38,7 @@
 
           <v-btn color="#f39021" class="menu-button-selected pa-2" dark>
             <v-icon class="mr-2">{{ icons.mdiCartOutline }}</v-icon>
-            <span>Đã chọn ()</span>
+            <span>Đã chọn (0)</span>
           </v-btn>
         </v-layout>
       </v-flex>
@@ -90,6 +90,10 @@ export default {
 <style  scoped>
 .menu {
   padding: 0 12px;
+}
+
+.menu-container-left{
+  justify-content: start;
 }
 .menu-bar {
   color: #f2f3f7;
@@ -166,5 +170,14 @@ s .v-card__subtitle,
   .menu-input-text {
     display: block;
   }
+}
+@media screen and (max-width: 600px){
+  .menu-bar{
+    margin: 0;
+  }
+  .menu-container-left{
+    justify-content: space-between;
+  }
+
 }
 </style>

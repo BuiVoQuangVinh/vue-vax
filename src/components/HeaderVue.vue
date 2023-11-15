@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <v-layout class="header-container pl-4">
+    <v-layout class="header-container">
       <v-flex class="header-logo align-self-center">
         <a href="/">
           <svg
@@ -561,6 +561,12 @@ export default {
   }
   .header-nav-container {
     display: none;
+  }
+}
+
+@media screen and (max-width: 780px){
+  .header-navigation-bar-phonenumber{
+    font-size: 14px;
   }
 }
 </style>

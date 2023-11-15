@@ -1,14 +1,14 @@
 <template>
   <div class="about">
-    <ListProduct />
+    <FooterVue />
   </div>
 </template>
 
 <script>
-import ListProduct from "@/components/ListProduct.vue";
+import FooterVue from "@/components/FooterVue.vue";
 export default {
   components: {
-    ListProduct,
+    FooterVue,
   },
 };
 </script>

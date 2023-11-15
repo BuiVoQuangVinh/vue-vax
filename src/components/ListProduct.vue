@@ -217,7 +217,7 @@ export default {
 
   .vaccine-item{
     display: inline-block;
-    width: 33%;
+    width: 300px;
   }
 }
 </style>
